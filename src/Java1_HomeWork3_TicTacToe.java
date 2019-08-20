@@ -85,15 +85,54 @@ public class Java1_HomeWork3_TicTacToe {
                 y = random.nextInt(SIZE);
             } while (!isCellValid(x, y));
         } else {
-            for (int i = 0; i < SIZE; i++) {
+            outer: for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     // проверяем клетки по направлениям
+                    if (isCellValid(i,j)) {
+                        if (checkNeighbors(i, j)) {
+                            x = i;
+                            y = j;
+                            break outer;
+                        } else {
+                            do {
+                                x = random.nextInt(SIZE);
+                                y = random.nextInt(SIZE);
+                            } while (!isCellValid(x, y));
+                        }
+                    }
                 }
             }
         }
 
         System.out.println("Компьютер выбрал ячейку " + (y+1) + " " + (x+1));
         map[y][x] = DOT_O;
+    }
+
+    private static boolean checkNeighbors(int i, int j) {
+        boolean result = false;
+
+        System.out.println("i = " + i + " j = " + j);
+        if ((i==0 && j==0) && (map[1][0] == DOT_O || map[1][1] == DOT_O || map[0][1] == DOT_O)) {
+            result = true;
+        } else if ((i==0 && j==1) && (map[0][0] == DOT_O || map[1][0] == DOT_O || map[1][1] == DOT_O || map[1][2] == DOT_O || map[0][2] == DOT_O)) {
+            result = true;
+        } else if ((i==0 && j==2) && (map[0][1] == DOT_O || map[1][1] == DOT_O || map[1][2] == DOT_O)) {
+            result = true;
+        } else if ((i==1 && j==0) && (map[0][0] == DOT_O || map[0][1] == DOT_O || map[1][1] == DOT_O || map[2][1] == DOT_O || map[2][0] == DOT_O)) {
+            result = true;
+        } else if ((i==1 && j==1) && (map[0][0] == DOT_O || map[0][1] == DOT_O || map[0][2] == DOT_O || map[1][0] == DOT_O || map[1][2] == DOT_O || map[2][0] == DOT_O || map[2][1] == DOT_O || map[2][2] == DOT_O)) {
+            result = true;
+        } else if ((i==1 && j==2) && (map[0][1] == DOT_O || map[1][1] == DOT_O || map[0][2] == DOT_O || map[2][1] == DOT_O || map[2][2] == DOT_O)) {
+            result = true;
+        } else if ((i==2 && j==0) && (map[1][0] == DOT_O || map[1][1] == DOT_O || map[2][1] == DOT_O)) {
+            result = true;
+        } else if ((i==2 && j==1) && (map[1][0] == DOT_O || map[1][1] == DOT_O || map[1][2] == DOT_O || map[2][0] == DOT_O || map[2][2] == DOT_O)) {
+            result = true;
+        } else if ((i==2 && j==2) && (map[1][1] == DOT_O || map[1][2] == DOT_O || map[2][1] == DOT_O)) {
+            result = true;
+        }
+
+        return result;
     }
 
     private static boolean isCellValid(int x, int y) {
