@@ -158,7 +158,7 @@ public class Java1_HomeWork3_TicTacToe {
         if (checkWin(playerSymbol)) {
             System.out.println("Победили " + playerSymbol);
             result = true;
-        } else if (isMapFull()) {
+        } else if (isMapFull()) {   // добавил возможность выигрыша при заполненном поле без вывода "Ничья"
             System.out.println("Ничья");
             result = true;
         }
@@ -175,7 +175,6 @@ public class Java1_HomeWork3_TicTacToe {
                     result = false;
             }
         }
-
         return result;
     }
 
