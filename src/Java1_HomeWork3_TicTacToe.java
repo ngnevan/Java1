@@ -88,10 +88,11 @@ public class Java1_HomeWork3_TicTacToe {
             outer: for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     // проверяем клетки по направлениям
-                    if (isCellValid(i,j)) {
+//                    System.out.println("i = " + i + " j = " + j);
+                    if (isCellValid(j, i)) {
                         if (checkNeighbors(i, j)) {
-                            x = i;
-                            y = j;
+                            x = j;
+                            y = i;
                             break outer;
                         } else {
                             do {
@@ -111,7 +112,7 @@ public class Java1_HomeWork3_TicTacToe {
     private static boolean checkNeighbors(int i, int j) {
         boolean result = false;
 
-        System.out.println("i = " + i + " j = " + j);
+//        System.out.println("i = " + i + " j = " + j);
         if ((i==0 && j==0) && (map[1][0] == DOT_O || map[1][1] == DOT_O || map[0][1] == DOT_O)) {
             result = true;
         } else if ((i==0 && j==1) && (map[0][0] == DOT_O || map[1][0] == DOT_O || map[1][1] == DOT_O || map[1][2] == DOT_O || map[0][2] == DOT_O)) {
@@ -157,9 +158,7 @@ public class Java1_HomeWork3_TicTacToe {
         if (checkWin(playerSymbol)) {
             System.out.println("Победили " + playerSymbol);
             result = true;
-        }
-
-        if (isMapFull()) {
+        } else if (isMapFull()) {
             System.out.println("Ничья");
             result = true;
         }
