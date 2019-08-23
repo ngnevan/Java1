@@ -23,11 +23,13 @@ public class Java1_HomeWork3_TicTacToe {
 
         while (true) {
             humanTurn();
+            printMap();
             if (isEndGame(DOT_X)) {
                 break;
             }
 
             computerTurn();
+            printMap();
             if (isEndGame(DOT_O)) {
                 break;
             }
@@ -88,7 +90,7 @@ public class Java1_HomeWork3_TicTacToe {
             outer: for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     // проверяем клетки по направлениям
-                    System.out.println("i = " + i + " j = " + j);
+//                    System.out.println("i = " + i + " j = " + j);
                     if (isCellValid(j, i)) {
                         if (checkNeighbors(j, i)) {
                             x = j;
@@ -112,7 +114,7 @@ public class Java1_HomeWork3_TicTacToe {
     private static boolean checkNeighbors(int j, int i) {
         boolean result = false;
 
-        System.out.println("i = " + i + " j = " + j);
+//        System.out.println("i = " + i + " j = " + j);
         if ((i==0 && j==0) && (map[1][0] == DOT_O || map[1][1] == DOT_O || map[0][1] == DOT_O)) {
             result = true;
         } else if ((i==0 && j==1) && (map[0][0] == DOT_O || map[1][0] == DOT_O || map[1][1] == DOT_O || map[1][2] == DOT_O || map[0][2] == DOT_O)) {
@@ -152,8 +154,6 @@ public class Java1_HomeWork3_TicTacToe {
 
     private static boolean isEndGame(char playerSymbol) {
         boolean result = false;
-
-        printMap();
 
         if (checkWin(playerSymbol)) {
             System.out.println("Победили " + playerSymbol);
