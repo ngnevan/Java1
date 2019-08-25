@@ -11,4 +11,9 @@ public class Cat extends Animal {
         this.jump_height = jump_height;
     }
 
+    public void swim(int distance) {
+        System.out.println("swim: Cats cannot swim");
+
+    }
+
 }

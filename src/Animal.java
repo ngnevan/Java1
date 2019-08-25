@@ -22,6 +22,7 @@ public class Animal {
             System.out.println("run: false");
         }
     }
+
     public void swim(int distance) {
         if (distance <= swim_distance) {
             System.out.println("swim: true");
@@ -29,6 +30,7 @@ public class Animal {
             System.out.println("swim: false");
         }
     }
+
     public void jump(int height) {
         if (height <= jump_height) {
             System.out.println("jump: true");
