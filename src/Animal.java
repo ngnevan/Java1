@@ -1,15 +1,18 @@
 public class Animal {
+    protected String name;
     protected double run_distance;
     protected double swim_distance;
     protected double jump_height;
 
     public Animal() {
+        this.name = "Unknown";
         this.run_distance = 0;
         this.swim_distance = 0;
         this.jump_height = 0;
     }
 
-    public Animal(double run_distance, double swim_distance, double jump_height) {
+    public Animal(String name, double run_distance, double swim_distance, double jump_height) {
+        this.name = name;
         this.run_distance = run_distance;
         this.swim_distance = swim_distance;
         this.jump_height = jump_height;
