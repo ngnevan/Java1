@@ -19,7 +19,7 @@ public class Calculator extends JFrame {
         container.setLayout(new BorderLayout());
         add(container);
 
-        // добавляем текстовое поле наверху JPanel
+        // добавляем текстовое поле наверху панели JPanel
         JTextField textField = new JTextField(8);
         textField.setFont(textField.getFont().deriveFont(25f));
         container.add(textField, BorderLayout.NORTH);
@@ -148,16 +148,18 @@ public class Calculator extends JFrame {
             }
         });
 
-        // по нажатию операций +, - , *, /, запоминаем первое число из текстового поля, тип операции
-        // и очищаем текстовое поле
+        // по нажатию операций +, - , *, /, проверяем что в текстовом поле есть число (возможно со знаком минус),
+        // запоминаем первое число из текстового поля, а также тип операции, и очищаем текстовое поле
         // для конвертации строки в целое число используем класс оболочку Integer
         // Это +
         jButton4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value1 = Integer.valueOf(textField.getText());
-                operation = "+";
-                textField.setText("");
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value1 = Integer.valueOf(textField.getText());
+                    operation = "+";
+                    textField.setText("");
+                }
             }
         });
 
@@ -165,9 +167,11 @@ public class Calculator extends JFrame {
         jButton8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value1 = Integer.valueOf(textField.getText());
-                operation = "-";
-                textField.setText("");
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value1 = Integer.valueOf(textField.getText());
+                    operation = "-";
+                    textField.setText("");
+                }
             }
         });
 
@@ -175,9 +179,11 @@ public class Calculator extends JFrame {
         jButton12.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value1 = Integer.valueOf(textField.getText());
-                operation = "*";
-                textField.setText("");
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value1 = Integer.valueOf(textField.getText());
+                    operation = "*";
+                    textField.setText("");
+                }
             }
         });
 
@@ -185,33 +191,41 @@ public class Calculator extends JFrame {
         jButton16.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value1 = Integer.valueOf(textField.getText());
-                operation = "/";
-                textField.setText("");
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value1 = Integer.valueOf(textField.getText());
+                    operation = "/";
+                    textField.setText("");
+                }
             }
         });
 
-        // По нажатию кнопки =, считываем второе число из текстового поля, и в зависимости от типа операции
-        // выполняем сложение, вычитание, умножение или деление. Результат выводим на текстовое поле
+        // По нажатию кнопки =, проверяем что в текстовом поле есть число, считываем второе число
+        // из текстового поля, и в зависимости от типа операции выполняем сложение, вычитание, умножение или деление.
+        // Результат выводим на текстовое поле
         jButton15.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value2 = Integer.valueOf(textField.getText());
-                switch (operation) {
-                    case ("+"):
-                        textField.setText(Integer.toString(value1 + value2));
-                        break;
-                    case ("-"):
-                        textField.setText(Integer.toString(value1 - value2));
-                        break;
-                    case ("*"):
-                        textField.setText(Integer.toString(value1 * value2));
-                        break;
-                    case ("/"):
-                        textField.setText(Integer.toString(value1 / value2));
-                        break;
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value2 = Integer.valueOf(textField.getText());
+                    switch (operation) {
+                        case ("+"):
+                            textField.setText(Integer.toString(value1 + value2));
+                            operation = "";
+                            break;
+                        case ("-"):
+                            textField.setText(Integer.toString(value1 - value2));
+                            operation = "";
+                            break;
+                        case ("*"):
+                            textField.setText(Integer.toString(value1 * value2));
+                            operation = "";
+                            break;
+                        case ("/"):
+                            textField.setText(Integer.toString(value1 / value2));
+                            operation = "";
+                            break;
+                    }
                 }
-
             }
         });
 
