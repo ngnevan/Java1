@@ -46,6 +46,7 @@ public class Calculator extends JFrame {
         JButton jButton14 = new JButton("0");
         JButton jButton15 = new JButton("=");
         JButton jButton16 = new JButton("/");
+        JButton jButton17 = new JButton("^");
 
         // добавляем клавиши на JPanel с табличной раскладкой
         jPanel1.add(jButton1);
@@ -64,6 +65,7 @@ public class Calculator extends JFrame {
         jPanel1.add(jButton14);
         jPanel1.add(jButton15);
         jPanel1.add(jButton16);
+        jPanel1.add(jButton17);
 
         container.revalidate();
 
@@ -148,7 +150,7 @@ public class Calculator extends JFrame {
             }
         });
 
-        // по нажатию операций +, - , *, /, проверяем что в текстовом поле есть число (возможно со знаком минус),
+        // по нажатию операций +, - , *, /, ^, проверяем что в текстовом поле есть число (возможно со знаком минус),
         // запоминаем первое число из текстового поля, а также тип операции, и очищаем текстовое поле
         // для конвертации строки в целое число используем класс оболочку Integer
         // Это +
@@ -199,6 +201,18 @@ public class Calculator extends JFrame {
             }
         });
 
+        // Это ^
+        jButton17.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ((!textField.getText().isEmpty()) && (textField.getText().matches("-?[0-9]+"))) {
+                    value1 = Integer.valueOf(textField.getText());
+                    operation = "^";
+                    textField.setText("");
+                }
+            }
+        });
+
         // По нажатию кнопки =, проверяем что в текстовом поле есть число, считываем второе число
         // из текстового поля, и в зависимости от типа операции выполняем сложение, вычитание, умножение или деление.
         // Результат выводим на текстовое поле
@@ -222,6 +236,10 @@ public class Calculator extends JFrame {
                             break;
                         case ("/"):
                             textField.setText(Integer.toString(value1 / value2));
+                            operation = "";
+                            break;
+                        case ("^"):
+                            textField.setText(Integer.toString((int)Math.pow(value1, value2)));
                             operation = "";
                             break;
                     }
